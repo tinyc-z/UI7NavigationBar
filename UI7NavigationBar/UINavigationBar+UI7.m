@@ -38,7 +38,7 @@ static UIImageView *_navColorOverly=nil;
         UIRectFill(CGRectMake(0, 0, 1, 1));
         UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
-        [self setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
+        [[UINavigationBar appearance] setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
     });
 
     if(_IOS_VERSION_UI7<7){
