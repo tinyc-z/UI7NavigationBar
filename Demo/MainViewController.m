@@ -29,11 +29,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
     if([[[UIDevice currentDevice] systemVersion] floatValue]>=7){
         self.edgesForExtendedLayout = UIRectEdgeNone;
         self.extendedLayoutIncludesOpaqueBars = NO;
         self.modalPresentationCapturesStatusBarAppearance = NO;
     }
+#endif
     
     UILabel *lb=[[UILabel alloc] initWithFrame:CGRectMake(10, 120, 50, 20)];
     [self.view addSubview:lb];

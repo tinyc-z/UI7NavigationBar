@@ -11,7 +11,7 @@
 
 #define _IOS_VERSION_UI7 ([[[UIDevice currentDevice] systemVersion] floatValue])
 
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_4_3
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_5_0
 #error UI7NavigationBar doesn't support Deployement Target version < 5.0
 #endif
 
