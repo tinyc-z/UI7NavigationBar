@@ -8,11 +8,12 @@
 
 #import "UINavigationBar+UI7.h"
 #import <objc/runtime.h>
+#import <QuartzCore/QuartzCore.h>
 
 #define _IOS_VERSION_UI7 ([[[UIDevice currentDevice] systemVersion] floatValue])
 
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_5_0
-#error UI7NavigationBar doesn't support Deployement Target version < 5.0
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_4_3
+#error UI7NavigationBar doesn't support Deployement Target version < 4.3
 #endif
 
 @implementation UINavigationBar (UI7)
@@ -38,7 +39,12 @@ static UIImageView *_navColorOverly=nil;
         UIRectFill(CGRectMake(0, 0, 1, 1));
         UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
-        [[UINavigationBar appearance] setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
+        if(_IOS_VERSION_UI7<5){
+            self.layer.contents=(id)image.CGImage;
+        }else{
+            [[UINavigationBar appearance] setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
+        }
+
     });
 
     if(_IOS_VERSION_UI7<7){

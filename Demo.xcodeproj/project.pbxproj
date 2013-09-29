@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		47337CAD17F838D700E4695E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47337CAC17F838D700E4695E /* QuartzCore.framework */; };
 		4774BCBD17F5F2FC00CBB893 /* UINavigationBar+UI7.m in Sources */ = {isa = PBXBuildFile; fileRef = 4774BCBC17F5F2FC00CBB893 /* UINavigationBar+UI7.m */; };
 		4775D9D617F591EE00D6C342 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4775D9D517F591EE00D6C342 /* MainViewController.m */; };
 		4775D9D817F5941E00D6C342 /* rain-568h@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4775D9D717F5941E00D6C342 /* rain-568h@2x.jpg */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		47337CAC17F838D700E4695E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		4774BCBB17F5F2FC00CBB893 /* UINavigationBar+UI7.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+UI7.h"; sourceTree = "<group>"; };
 		4774BCBC17F5F2FC00CBB893 /* UINavigationBar+UI7.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+UI7.m"; sourceTree = "<group>"; };
 		4775D9D417F591EE00D6C342 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
@@ -52,6 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				47337CAD17F838D700E4695E /* QuartzCore.framework in Frameworks */,
 				4791952617F57EBB001ABE29 /* UIKit.framework in Frameworks */,
 				4791952817F57EBB001ABE29 /* Foundation.framework in Frameworks */,
 				4791952A17F57EBB001ABE29 /* CoreGraphics.framework in Frameworks */,
@@ -73,6 +76,7 @@
 		4791951917F57EBB001ABE29 = {
 			isa = PBXGroup;
 			children = (
+				47337CAC17F838D700E4695E /* QuartzCore.framework */,
 				4774BCBA17F5F2FC00CBB893 /* UI7NavigationBar */,
 				4791952B17F57EBB001ABE29 /* Demo */,
 				4791952417F57EBB001ABE29 /* Frameworks */,
@@ -281,7 +285,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Demo/Demor-Prefix.pch";
 				INFOPLIST_FILE = "Demo/Demor-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = Demor;
 				WRAPPER_EXTENSION = app;
 			};
@@ -293,7 +297,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Demo/Demor-Prefix.pch";
 				INFOPLIST_FILE = "Demo/Demor-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = Demor;
 				WRAPPER_EXTENSION = app;
 			};
