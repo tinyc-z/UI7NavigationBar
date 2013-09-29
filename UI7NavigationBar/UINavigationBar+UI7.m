@@ -95,7 +95,24 @@ static const char *navOverlyColor = "navOverlyColor";
     [self navColorOverly].image=[image stretchableImageWithLeftCapWidth:1 topCapHeight:1];
 }
 
+@end
 
+@implementation UIViewController (UI7)
 
+#ifdef __IPHONE_7_0
+-(UIRectEdge)edgesForExtendedLayout
+{
+    return UIRectEdgeNone;
+}
+
+- (BOOL)extendedLayoutIncludesOpaqueBars
+{
+    return NO;
+}
+- (BOOL)modalPresentationCapturesStatusBarAppearance
+{
+    return NO;
+}
+#endif
 
 @end

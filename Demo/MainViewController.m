@@ -8,6 +8,7 @@
 
 #import "MainViewController.h"
 #import "UINavigationBar+UI7.h"
+#import "OtherViewController.h"
 
 
 @interface MainViewController ()
@@ -29,14 +30,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
-    if([[[UIDevice currentDevice] systemVersion] floatValue]>=7){
-        self.edgesForExtendedLayout = UIRectEdgeNone;
-        self.extendedLayoutIncludesOpaqueBars = NO;
-        self.modalPresentationCapturesStatusBarAppearance = NO;
-    }
-#endif
+    
+    self.title=@"first";
     
     UILabel *lb=[[UILabel alloc] initWithFrame:CGRectMake(10, 120, 50, 20)];
     [self.view addSubview:lb];
@@ -58,8 +53,20 @@
     colorSelecter.frame=CGRectMake(40, 50, 220, 40);
     
     [self.view addSubview:colorSelecter];
-
+    
+    
+    UIButton *bn=[[UIButton alloc]initWithFrame:CGRectMake(100, 200, 100, 40)];
+    [self.view addSubview:bn];
+    [bn setTitle:@"push" forState:UIControlStateNormal];
+    [bn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    [bn addTarget:self action:@selector(onBn:) forControlEvents:UIControlEventTouchUpInside];
 	// Do any additional setup after loading the view.
+}
+
+- (IBAction)onBn:(id)sender
+{
+    OtherViewController *other=[[OtherViewController alloc] init];
+    [self.navigationController pushViewController:other animated:YES];
 }
 
 
