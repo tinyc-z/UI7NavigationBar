@@ -16,6 +16,11 @@
 #error UI7NavigationBar doesn't support Deployement Target version < 4.3
 #endif
 
+
+@interface UIApplication (UI7)
++ (void)inject;
+@end
+
 @implementation UINavigationBar (UI7)
 
 + (void)injectUI7NavBar
@@ -24,9 +29,9 @@
     Method newMethod=class_getInstanceMethod(self, @selector(__layoutSubviews));
     
     method_exchangeImplementations(originMethod, newMethod);
+    [UIApplication inject];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent];
 }
-
-static UIImageView *_navColorOverly=nil;
 
 -(void)__layoutSubviews
 {
@@ -44,34 +49,39 @@ static UIImageView *_navColorOverly=nil;
         }else{
             [[UINavigationBar appearance] setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
         }
-
-    });
-
-    if(_IOS_VERSION_UI7<7){
-        static UIView *statusBackground=nil;
-        if (!statusBackground) {
-            NSArray *vs=[[[UIApplication sharedApplication] valueForKey:@"_statusBar"] subviews];
-            for (UIView *v in vs) {
-                if ([v isKindOfClass:NSClassFromString(@"UIStatusBarBackgroundView")]) {
-                    statusBackground=v;
-                    break;
-                }
+        NSArray *vs=[self subviews];
+        Class clazz=NSClassFromString(@"_UINavigationBarBackground");
+        for (UIView *v in vs) {
+            if ([v isKindOfClass:clazz]) {
+                v.hidden=YES;
+                break;
             }
         }
-        [statusBackground setAlpha:0];
-    }
+    });
     [self sendSubviewToBack:[self navColorOverly]];
+    
 }
 
 
+static const char *navColorOverly = "navColorOverly";
+
+- (UIImageView *)_navColorOverly {
+    return (UIImageView *)objc_getAssociatedObject(self, navColorOverly);
+}
+
+- (void)_setNavColorOverly:(UIImageView *)Overly {
+    objc_setAssociatedObject(self, navColorOverly, Overly, OBJC_ASSOCIATION_RETAIN);
+}
+
 - (UIImageView *)navColorOverly
 {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
+    UIImageView *_navColorOverly=(UIImageView*)[self _navColorOverly];
+    if (!_navColorOverly) {
         _navColorOverly=[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height+20)];
         _navColorOverly.frame=CGRectMake(0, -20, self.frame.size.width, 64);
-        [self addSubview:_navColorOverly];
-    });
+        [self insertSubview:_navColorOverly atIndex:0];
+        [self _setNavColorOverly:_navColorOverly];
+    }
     return _navColorOverly;
 }
 
@@ -103,22 +113,68 @@ static const char *navOverlyColor = "navOverlyColor";
 
 @end
 
-@implementation UIViewController (UI7)
+@implementation UIApplication (UI7)
 
-#ifdef __IPHONE_7_0
--(UIRectEdge)edgesForExtendedLayout
++ (void)inject
 {
-    return UIRectEdgeNone;
+    Method originMethod=class_getInstanceMethod(self, @selector(setStatusBarStyle:));
+    Method newMethod=class_getInstanceMethod(self, @selector(__setStatusBarStyle:));
+    
+    method_exchangeImplementations(originMethod, newMethod);
+    
+    originMethod=class_getInstanceMethod(self, @selector(setStatusBarStyle:animated:));
+    newMethod=class_getInstanceMethod(self, @selector(__setStatusBarStyle:animated:));
+    
+    method_exchangeImplementations(originMethod, newMethod);
 }
 
-- (BOOL)extendedLayoutIncludesOpaqueBars
+- (void)__setStatusBarStyle:(UIStatusBarStyle)style
 {
-    return NO;
+    [self __setStatusBarStyle:style];
+    if (style==UIStatusBarStyleBlackTranslucent) {
+        [self hiddenStatusBarBackground:YES];
+    }
 }
-- (BOOL)modalPresentationCapturesStatusBarAppearance
+
+-(void)__setStatusBarStyle:(UIStatusBarStyle)style animated:(BOOL)animated
 {
-    return NO;
+    [self __setStatusBarStyle:style animated:animated];
+    
+    if (style==UIStatusBarStyleBlackTranslucent) {
+        if (animated) {
+            [self performSelector:@selector(hiddenStatusBarBackground:) withObject:@(YES) afterDelay:0.6];
+        }else{
+            [self hiddenStatusBarBackground:YES];
+        }
+    }
 }
-#endif
+
+- (void)hiddenStatusBarBackground:(BOOL)hidden
+{
+    if(_IOS_VERSION_UI7<7){
+        BOOL isStatusBarHidden=[[UIApplication sharedApplication] isStatusBarHidden];
+        if (isStatusBarHidden) {
+            [[UIApplication sharedApplication] setStatusBarHidden:NO];
+        }
+        UIView *statusbar=[[UIApplication sharedApplication] valueForKey:@"_statusBar"];
+        NSArray *vs=[statusbar subviews];
+        for (UIView *v in vs) {
+            if ([v isKindOfClass:NSClassFromString(@"UIStatusBarBackgroundView")]) {
+                statusbar=v;
+                break;
+            }
+        }
+        if (isStatusBarHidden) {
+            [[UIApplication sharedApplication] setStatusBarHidden:YES];
+        }
+        if (hidden) {
+            [statusbar setHidden:YES];
+        }else{
+            [statusbar setHidden:NO];
+        }
+    }
+}
 
 @end
+
+
