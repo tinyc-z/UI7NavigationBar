@@ -37,29 +37,38 @@
 {
     [self __layoutSubviews];
     
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
+    if (_IOS_VERSION_UI7<5) {
         UIGraphicsBeginImageContext(CGSizeMake(1, 1));
         [[UIColor colorWithRed:0 green:0 blue:0 alpha:0] set];
         UIRectFill(CGRectMake(0, 0, 1, 1));
         UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
-        if(_IOS_VERSION_UI7<5){
-            self.layer.contents=(id)image.CGImage;
-        }else{
-            [[UINavigationBar appearance] setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
-        }
-        NSArray *vs=[self subviews];
-        Class clazz=NSClassFromString(@"_UINavigationBarBackground");
-        for (UIView *v in vs) {
-            if ([v isKindOfClass:clazz]) {
-                v.hidden=YES;
-                break;
+        self.layer.contents=(id)image.CGImage;
+        [self setConstomBackgroundColor:[self navOverlyColor]];
+    }else{
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            UIGraphicsBeginImageContext(CGSizeMake(1, 1));
+            [[UIColor colorWithRed:0 green:0 blue:0 alpha:0] set];
+            UIRectFill(CGRectMake(0, 0, 1, 1));
+            UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+            if(_IOS_VERSION_UI7<5){
+                self.layer.contents=(id)image.CGImage;
+            }else{
+                [[UINavigationBar appearance] setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
             }
-        }
-    });
+            NSArray *vs=[self subviews];
+            Class clazz=NSClassFromString(@"_UINavigationBarBackground");
+            for (UIView *v in vs) {
+                if ([v isKindOfClass:clazz]) {
+                    v.hidden=YES;
+                    break;
+                }
+            }
+        });
+    }
     [self sendSubviewToBack:[self navColorOverly]];
-    
 }
 
 
