@@ -7,8 +7,8 @@
 //
 
 #import "MainViewController.h"
-#import "UINavigationBar+UI7.h"
 #import "OtherViewController.h"
+#import "TTNavigationController.h"
 
 
 @interface MainViewController ()
@@ -33,12 +33,12 @@
     
     self.title=@"first";
     
-    UILabel *lb=[[UILabel alloc] initWithFrame:CGRectMake(10, 120, 50, 20)];
+    UILabel *lb=[[UILabel alloc] initWithFrame:CGRectMake(10, 220, 50, 20)];
     [self.view addSubview:lb];
     [lb setBackgroundColor:[UIColor clearColor]];
 
     lb.text=@"alpha:";
-    UISlider *slalpha=[[UISlider alloc] initWithFrame:CGRectMake(60, 120, 220, 20)];
+    UISlider *slalpha=[[UISlider alloc] initWithFrame:CGRectMake(60, 220, 220, 20)];
     [self.view addSubview:slalpha];
     [slalpha setValue:0.66];
     [slalpha addTarget:self action:@selector(onUpdateAlphaVaule:) forControlEvents:UIControlEventValueChanged];
@@ -50,12 +50,12 @@
     [colorSelecter setSelectedSegmentIndex:0];
     [colorSelecter addTarget:self action:@selector(onChangeColor:) forControlEvents:UIControlEventValueChanged];
     
-    colorSelecter.frame=CGRectMake(40, 50, 220, 40);
+    colorSelecter.frame=CGRectMake(40, 150, 220, 40);
     
     [self.view addSubview:colorSelecter];
     
     
-    UIButton *bn=[[UIButton alloc]initWithFrame:CGRectMake(100, 200, 100, 40)];
+    UIButton *bn=[[UIButton alloc]initWithFrame:CGRectMake(100, 300, 100, 40)];
     [self.view addSubview:bn];
     [bn setTitle:@"push" forState:UIControlStateNormal];
     [bn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
@@ -72,18 +72,19 @@
 
 - (void)onChangeColor:(UISegmentedControl *)sender
 {
+    TTNavigationController *nav=(id)self.navigationController;
     switch ([sender selectedSegmentIndex]) {
         case 0:
-            [self.navigationController.navigationBar setConstomBackgroundColor:[UIColor blackColor]];
+            [nav setNavBarBgWithColor:[UIColor blackColor]];
             break;
         case 1:
-            [self.navigationController.navigationBar setConstomBackgroundColor:[UIColor redColor]];
+            [nav setNavBarBgWithColor:[UIColor redColor]];
             break;
         case 2:
-            [self.navigationController.navigationBar setConstomBackgroundColor:[UIColor yellowColor]];
+            [nav setNavBarBgWithColor:[UIColor yellowColor]];
             break;
         case 3:
-            [self.navigationController.navigationBar setConstomBackgroundColor:[UIColor blueColor]];
+            [nav setNavBarBgWithColor:[UIColor blueColor]];
             break;
         default:
             break;
@@ -94,7 +95,7 @@
 
 - (void)onUpdateAlphaVaule:(UISlider *)sender
 {
-    [self.navigationController.navigationBar setConstomBackgroundAlpha:sender.value];
+    //
 }
 
 - (void)didReceiveMemoryWarning

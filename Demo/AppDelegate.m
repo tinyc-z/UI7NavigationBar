@@ -7,26 +7,25 @@
 //
 
 #import "AppDelegate.h"
-#import "UINavigationBar+UI7.h"
+#import "UIApplication+UI7.h"
 #import "MainViewController.h"
+#import "TTNavigationController.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
-//    application.statusBarStyle=UIStatusBarStyleBlackTranslucent;
     
-    [UINavigationBar injectUI7NavBar];
+    [UIApplication inject];
+    
+    application.statusBarStyle=UIStatusBarStyleBlackTranslucent;
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     UIViewController *root=[[MainViewController alloc] init];
-    UINavigationController *nav=[[UINavigationController alloc] initWithRootViewController:root];
+    TTNavigationController *nav=[[TTNavigationController alloc] initWithRootViewController:root];
     self.window.rootViewController=nav;
-    
-    [nav.navigationBar setConstomBackgroundColor:[UIColor colorWithRed:0.52f green:0.84f blue:0.40f alpha:1.00f]];
-    [nav.navigationBar setConstomBackgroundAlpha:0.66];
     
     UIImageView *bgView=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg.jpg"]];
     

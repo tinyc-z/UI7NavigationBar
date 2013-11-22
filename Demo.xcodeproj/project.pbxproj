@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		471D8D811821188C00F6E61D /* UINavigationBar+UI7.m in Sources */ = {isa = PBXBuildFile; fileRef = 471D8D801821188C00F6E61D /* UINavigationBar+UI7.m */; };
 		471D8D841821189B00F6E61D /* UIViewController+UIRectEdge.m in Sources */ = {isa = PBXBuildFile; fileRef = 471D8D831821189B00F6E61D /* UIViewController+UIRectEdge.m */; };
 		47337CAD17F838D700E4695E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47337CAC17F838D700E4695E /* QuartzCore.framework */; };
+		47629F75183F286C006C6D70 /* TTNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47629F74183F286C006C6D70 /* TTNavigationController.m */; };
+		47629F7B183F2A0B006C6D70 /* UIApplication+UI7.m in Sources */ = {isa = PBXBuildFile; fileRef = 47629F7A183F2A0B006C6D70 /* UIApplication+UI7.m */; };
 		4775D9D617F591EE00D6C342 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4775D9D517F591EE00D6C342 /* MainViewController.m */; };
 		4775D9D817F5941E00D6C342 /* rain-568h@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4775D9D717F5941E00D6C342 /* rain-568h@2x.jpg */; };
 		4775D9DA17F595A800D6C342 /* bg@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4775D9D917F595A800D6C342 /* bg@2x.jpg */; };
@@ -26,11 +27,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		471D8D7F1821188C00F6E61D /* UINavigationBar+UI7.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+UI7.h"; sourceTree = "<group>"; };
-		471D8D801821188C00F6E61D /* UINavigationBar+UI7.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+UI7.m"; sourceTree = "<group>"; };
 		471D8D821821189B00F6E61D /* UIViewController+UIRectEdge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+UIRectEdge.h"; sourceTree = "<group>"; };
 		471D8D831821189B00F6E61D /* UIViewController+UIRectEdge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+UIRectEdge.m"; sourceTree = "<group>"; };
 		47337CAC17F838D700E4695E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		47629F73183F286C006C6D70 /* TTNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTNavigationController.h; sourceTree = "<group>"; };
+		47629F74183F286C006C6D70 /* TTNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTNavigationController.m; sourceTree = "<group>"; };
+		47629F79183F2A0B006C6D70 /* UIApplication+UI7.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+UI7.h"; sourceTree = "<group>"; };
+		47629F7A183F2A0B006C6D70 /* UIApplication+UI7.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+UI7.m"; sourceTree = "<group>"; };
 		4775D9D417F591EE00D6C342 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		4775D9D517F591EE00D6C342 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		4775D9D717F5941E00D6C342 /* rain-568h@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "rain-568h@2x.jpg"; sourceTree = "<group>"; };
@@ -70,8 +73,10 @@
 		4774BCBA17F5F2FC00CBB893 /* UI7NavigationBar */ = {
 			isa = PBXGroup;
 			children = (
-				471D8D7F1821188C00F6E61D /* UINavigationBar+UI7.h */,
-				471D8D801821188C00F6E61D /* UINavigationBar+UI7.m */,
+				47629F79183F2A0B006C6D70 /* UIApplication+UI7.h */,
+				47629F7A183F2A0B006C6D70 /* UIApplication+UI7.m */,
+				47629F73183F286C006C6D70 /* TTNavigationController.h */,
+				47629F74183F286C006C6D70 /* TTNavigationController.m */,
 				471D8D821821189B00F6E61D /* UIViewController+UIRectEdge.h */,
 				471D8D831821189B00F6E61D /* UIViewController+UIRectEdge.m */,
 			);
@@ -208,8 +213,9 @@
 				47ECEF9B17F8049500FC2F0C /* OtherViewController.m in Sources */,
 				4791953617F57EBB001ABE29 /* AppDelegate.m in Sources */,
 				4775D9D617F591EE00D6C342 /* MainViewController.m in Sources */,
-				471D8D811821188C00F6E61D /* UINavigationBar+UI7.m in Sources */,
+				47629F7B183F2A0B006C6D70 /* UIApplication+UI7.m in Sources */,
 				471D8D841821189B00F6E61D /* UIViewController+UIRectEdge.m in Sources */,
+				47629F75183F286C006C6D70 /* TTNavigationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
