@@ -21,9 +21,14 @@
     [super viewDidLoad];
     
     self.navigationBar.opaque = NO;
-    if ([[[UIDevice currentDevice] systemVersion] floatValue]>=5) {
+    if (kCFCoreFoundationVersionNumber>=kCFCoreFoundationVersionNumber_iOS_5_0) {
         NSArray *vs=[self.navigationBar subviews];
-        Class clazz=NSClassFromString(@"_UINavigationBarBackground");
+        Class clazz;
+        if (kCFCoreFoundationVersionNumber>=kCFCoreFoundationVersionNumber_iOS_6_0) {
+            clazz=NSClassFromString(@"_UINavigationBarBackground");
+        }else{
+            clazz=NSClassFromString(@"UINavigationBarBackground");
+        }
         for (UIView *v in vs) {
             if ([v isKindOfClass:clazz]) {
                 v.hidden=YES;
