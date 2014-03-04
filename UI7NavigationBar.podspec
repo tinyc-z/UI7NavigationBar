@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.license      = 'Apache'
   s.author       = { "ibcker" => "happymiyu@gmail.com" }
   s.source       = { :git => "https://github.com/iBcker/UI7NavigationBar.git", :tag => "0.1.1" }
-  s.framework  = 'QuartzCore'
   s.source_files  = 'Classes', 'UI7NavigationBar/*.{h,m}'
   s.exclude_files = 'Classes/Exclude'
+  s.requires_arc = true
 end
