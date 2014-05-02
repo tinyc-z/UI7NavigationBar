@@ -12,11 +12,11 @@
 
 @implementation UIViewController (UIRectEdge)
 
-static const char *__wantsFullScreenLayout__ = "__wantsFullScreenLayout__";
+static const char *kWantsFullScreenLayoutKey;
 
 - (BOOL)wantsFullScreenLayout
 {
-    id v=objc_getAssociatedObject(self,__wantsFullScreenLayout__);
+    id v=objc_getAssociatedObject(self,&kWantsFullScreenLayoutKey);
     if (v!=nil) {
         return [v boolValue];
     }else{
@@ -26,14 +26,14 @@ static const char *__wantsFullScreenLayout__ = "__wantsFullScreenLayout__";
 
 - (void)setWantsFullScreenLayout:(BOOL)b
 {
-    objc_setAssociatedObject(self, __wantsFullScreenLayout__, @(b), OBJC_ASSOCIATION_ASSIGN);
+    objc_setAssociatedObject(self, &kWantsFullScreenLayoutKey, @(b), OBJC_ASSOCIATION_ASSIGN);
 }
 
-static const char *__automaticallyAdjustsScrollViewInsets__ = "__automaticallyAdjustsScrollViewInsets__";
+static const char *kAutomaticallyAdjustsScrollViewInsetsKey;
 
 - (BOOL)automaticallyAdjustsScrollViewInsets
 {
-    id v=objc_getAssociatedObject(self,__automaticallyAdjustsScrollViewInsets__);
+    id v=objc_getAssociatedObject(self,&kAutomaticallyAdjustsScrollViewInsetsKey);
     if (v!=nil) {
         return [v boolValue];
     }else{
@@ -43,15 +43,15 @@ static const char *__automaticallyAdjustsScrollViewInsets__ = "__automaticallyAd
 
 - (void)setAutomaticallyAdjustsScrollViewInsets:(BOOL)b
 {
-    objc_setAssociatedObject(self, __automaticallyAdjustsScrollViewInsets__, @(b), OBJC_ASSOCIATION_ASSIGN);
+    objc_setAssociatedObject(self, &kAutomaticallyAdjustsScrollViewInsetsKey, @(b), OBJC_ASSOCIATION_ASSIGN);
 }
 
 
-static const char *__edgesForExtendedLayout__ = "__edgesForExtendedLayout__";
+static const char *kEdgesForExtendedLayoutKey;
 
 - (UIRectEdge)edgesForExtendedLayout
 {
-    id v=objc_getAssociatedObject(self,__edgesForExtendedLayout__);
+    id v=objc_getAssociatedObject(self,&kEdgesForExtendedLayoutKey);
     if (v!=nil) {
         return [v integerValue];
     }else{
@@ -61,7 +61,7 @@ static const char *__edgesForExtendedLayout__ = "__edgesForExtendedLayout__";
 
 - (void)setEdgesForExtendedLayout:(UIRectEdge)rect
 {
-    objc_setAssociatedObject(self, __edgesForExtendedLayout__, @(rect), OBJC_ASSOCIATION_ASSIGN);
+    objc_setAssociatedObject(self, &kEdgesForExtendedLayoutKey, @(rect), OBJC_ASSOCIATION_ASSIGN);
 }
 
 @end

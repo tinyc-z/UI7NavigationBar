@@ -4,12 +4,12 @@
 //
 //  Created by iBcker on 13-10-28.
 //
-//  让 xocde4 能编译过
+
 
 #import <UIKit/UIKit.h>
 
 #ifndef __IPHONE_7_0
-typedef NS_OPTIONS(NSUInteger, UIRectEdge) {
+typedef NS_OPTIONS(NSUInteger, UIRectEdge) { //  让 xocde4 能编译过
     UIRectEdgeNone   = 0,
     UIRectEdgeTop    = 1 << 0,
     UIRectEdgeLeft   = 1 << 1,
