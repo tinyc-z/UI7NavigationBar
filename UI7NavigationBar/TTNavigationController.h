@@ -8,17 +8,24 @@
 
 #import <UIKit/UIKit.h>
 
-typedef NS_ENUM(NSUInteger, UI7NavBarSytle)
+typedef NS_ENUM(NSUInteger, TTNavBarSytle)
 {
-    UI7NavBarSytleLight, //0.4 alpha
-    UI7NavBarSytleDark, //0.8 alpha
-    UI7NavBarSytleBlack, //1.0
+    TTNavBarSytleLight, //0.4 alpha
+    TTNavBarSytleDark, //0.8 alpha
+    TTNavBarSytleBlack, //1.0
+    TTNavBarSytleTransparent, //0.0 alpha
+    TTNavBarSytleImage, //自定义图片
+    TTNavBarSytleColor, //自定义色值
 };
 
 @interface TTNavigationController : UINavigationController
+@property (nonatomic,assign)TTNavBarSytle navBarStyle;
+@property (nonatomic,strong,readonly)UIImageView *navOverly;
 
 - (void)setNavBarBgWithImage:(UIImage *)image;
 - (void)setNavBarBgWithColor:(UIColor *)cl;
-- (void)setNavBarStyle:(UI7NavBarSytle)style;
+- (void)setNavBarBgWithColor:(UIColor *)cl animated:(BOOL)animated;
+- (void)setNavBarStyle:(TTNavBarSytle)style;
+- (void)setNavBarStyle:(TTNavBarSytle)style animated:(BOOL)animated;
 
 @end

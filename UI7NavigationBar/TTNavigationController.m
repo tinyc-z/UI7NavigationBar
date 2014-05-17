@@ -19,15 +19,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     self.navigationBar.opaque = NO;
-    if (kCFCoreFoundationVersionNumber>=kCFCoreFoundationVersionNumber_iOS_5_0) {
+    CGFloat osVersion = [[[UIDevice currentDevice] systemVersion] floatValue];
+    if (osVersion>=5) {
         NSArray *vs=[self.navigationBar subviews];
         Class clazz;
-        if (kCFCoreFoundationVersionNumber>=kCFCoreFoundationVersionNumber_iOS_6_0) {
-            clazz=NSClassFromString(@"_UINavigationBarBackground");
-        }else{
+        if ((int)osVersion==5) {
             clazz=NSClassFromString(@"UINavigationBarBackground");
+        }else{
+            clazz=NSClassFromString(@"_UINavigationBarBackground");
         }
         for (UIView *v in vs) {
             if ([v isKindOfClass:clazz]) {
@@ -36,11 +36,14 @@
             }
         }
     }
-    [self setNavBarStyle:UI7NavBarSytleDark];
-    [self.navigationBar insertSubview:_navColorOverly atIndex:0];
+    [self setNavBarStyle:TTNavBarSytleDark];
+    [self.navigationBar insertSubview:self.navColorOverly atIndex:0];
 }
 
-
+- (UIImageView *)navOverly
+{
+    return _navColorOverly;
+}
 
 - (UIImageView *)navColorOverly
 {
@@ -48,38 +51,65 @@
         if (!_navColorOverly) {
             _navColorOverly=[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.navigationBar.frame.size.width, self.navigationBar.frame.size.height+20)];
             _navColorOverly.frame=CGRectMake(0, -20, self.navigationBar.frame.size.width, 64);
+            _navColorOverly.autoresizingMask=UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
         }
     }
     return _navColorOverly;
 }
-
-- (void)setNavBarStyle:(UI7NavBarSytle)style
+- (void)setNavBarStyle:(TTNavBarSytle)style animated:(BOOL)animated
 {
+    if (_navBarStyle==style) {
+        return;
+    }
     switch (style) {
-        case UI7NavBarSytleLight:
-            [self setNavBarBgWithColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.4]];
+        case TTNavBarSytleLight:
+            [self setNavBarBgWithColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.4] animated:animated];
             break;
-        case UI7NavBarSytleBlack:
-            [self setNavBarBgWithColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:1]];
+        case TTNavBarSytleBlack:
+            [self setNavBarBgWithColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:1] animated:animated];
             break;
-        default: //UI7NavBarSytleDark:
-            [self setNavBarBgWithColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.8]];
+        case TTNavBarSytleTransparent:
+            [self setNavBarBgWithColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0] animated:animated];
+            break;
+        default: //TTNavBarSytleDark:
+            [self setNavBarBgWithColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.8] animated:animated];
             break;
     }
+    _navBarStyle=style;
 }
 
-- (void)setNavBarBgWithColor:(UIColor *)cl
+
+- (void)setNavBarStyle:(TTNavBarSytle)style
 {
-    UIGraphicsBeginImageContext(CGSizeMake(1, 1));
+    [self setNavBarStyle:style animated:NO];
+}
+
+- (void)setNavBarBgWithColor:(UIColor *)cl animated:(BOOL)animated
+{
+    _navBarStyle=TTNavBarSytleColor;
+    [_navColorOverly.layer removeAnimationForKey:kCATransitionFade];
+    if (animated) {
+        CATransition *animate  = [CATransition animation];
+        animate.type = kCATransitionFade;
+        animate.duration = 0.3f;
+        [_navColorOverly.layer addAnimation:animate forKey:kCATransitionFade];
+    }
+    UIGraphicsBeginImageContext(CGSizeMake(2, 2));
     [cl set];
-    UIRectFill(CGRectMake(0, 0, 1, 1));
+    UIRectFill(CGRectMake(0, 0, 2, 2));
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     self.navColorOverly.image=[image stretchableImageWithLeftCapWidth:1 topCapHeight:1];
 }
 
+- (void)setNavBarBgWithColor:(UIColor *)cl
+{
+    [self setNavBarBgWithColor:cl animated:NO];
+}
+
 - (void)setNavBarBgWithImage:(UIImage *)image
 {
+    _navBarStyle=TTNavBarSytleImage;
     self.navColorOverly.image=image;
 }
 

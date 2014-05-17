@@ -96,6 +96,8 @@
 - (void)onUpdateAlphaVaule:(UISlider *)sender
 {
     //
+    TTNavigationController *nav=(id)self.navigationController;
+    nav.navOverly.alpha=sender.value;
 }
 
 - (void)didReceiveMemoryWarning
