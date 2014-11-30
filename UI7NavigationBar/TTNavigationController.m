@@ -94,12 +94,13 @@
         animate.duration = 0.3f;
         [_navColorOverly.layer addAnimation:animate forKey:kCATransitionFade];
     }
-    UIGraphicsBeginImageContext(CGSizeMake(2, 2));
-    [cl set];
-    UIRectFill(CGRectMake(0, 0, 2, 2));
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    self.navColorOverly.image=[image stretchableImageWithLeftCapWidth:1 topCapHeight:1];
+    //    UIGraphicsBeginImageContext(CGSizeMake(2, 2));
+    //    [cl set];
+    //    UIRectFill(CGRectMake(0, 0, 2, 2));
+    //    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    //    UIGraphicsEndImageContext();
+    self.navColorOverly.image=nil;
+    self.navColorOverly.backgroundColor=cl;
 }
 
 - (void)setNavBarBgWithColor:(UIColor *)cl

@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "UI7NavigationBar"
-  s.version      = "0.1.2"
+  s.version      = "0.1.3"
   s.summary      = "一个ios7风格的扁平化导航条"
   s.description  = <<-DESC
                    *一个ios7风格的扁平化导航条
